@@ -1,4 +1,4 @@
-name: Cache Workflow Fix
+name: Final Cache Fix
 on: [push, workflow_dispatch]
 
 jobs:
@@ -7,18 +7,16 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Cache Step
+      - name: Restore Cache
         id: cache-primes
         uses: actions/cache@v3
         with:
-          path: my-cache
+          path: cache.txt
           key: cache-9958c9b
 
-      - name: Create Data
+      - name: Create file if missing
         if: steps.cache-primes.outputs.cache-hit != 'true'
-        run: |
-          mkdir -p my-cache
-          echo "test data" > my-cache/data.txt
+        run: echo "hello" > cache.txt
 
       - name: prime-cache-9958c9b
-        run: echo "Cache Status: ${{ steps.cache-primes.outputs.cache-hit }}"
+        run: echo "Done"
