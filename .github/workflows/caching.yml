@@ -1,4 +1,4 @@
-name: Cache Workflow
+name: Cache Workflow Fix
 on: [push, workflow_dispatch]
 
 jobs:
@@ -7,18 +7,18 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Cache Primes
+      - name: Cache Step
         id: cache-primes
-        uses: actions/cache@v4
+        uses: actions/cache@v3
         with:
-          path: prime-numbers
+          path: my-cache
           key: cache-9958c9b
 
-      - name: Generate Prime Numbers
+      - name: Create Data
         if: steps.cache-primes.outputs.cache-hit != 'true'
         run: |
-          mkdir -p prime-numbers
-          echo "2, 3, 5, 7, 11" > prime-numbers/list.txt
+          mkdir -p my-cache
+          echo "test data" > my-cache/data.txt
 
       - name: prime-cache-9958c9b
-        run: echo "Cache Hit: ${{ steps.cache-primes.outputs.cache-hit }}"
+        run: echo "Cache Status: ${{ steps.cache-primes.outputs.cache-hit }}"
