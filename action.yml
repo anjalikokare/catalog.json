@@ -1,0 +1,11 @@
+name: Email Verification Action
+on: [push, workflow_dispatch]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: 24f2002015@ds.study.iitm.ac.in
+        run: echo "Hello, world! This is my email step."
